@@ -1,0 +1,54 @@
+repositories:
+  - name: stable
+    url: https://charts.helm.sh/stable
+
+releases:
+  - name: postgres
+    namespace: st
+    chart: ./charts/postgres
+    values:
+      - ./values/kanban-postgres.yaml
+
+  #- name: adminer
+  #  namespace: st
+  #  chart: ./charts/app
+  #  values:
+  #    - ./values/adminer.yaml
+
+  - name: kanban-app
+    namespace: st
+    chart: ./charts/app
+    values:
+      - ./values/kanban-app.yaml
+
+  - name: kanban-ui
+    namespace: st
+    chart: ./charts/app
+    values:
+      - ./values/kanban-ui.yaml
+
+  # - name: ingress-backend
+  #   namespace: st
+  #   chart: stable/nginx-ingress
+  #   version: 1.36.0
+
+  #- name: ingress-controller
+  #  chart: ./charts/ingress
+  #  namespace: st
+  #  values:
+  #    - ./values/ingress.yaml
+
+  - name: prometheus
+    namespace: monitoring
+    chart: stable/prometheus
+    version: 11.0.4
+    values:
+      - ./values/prometheus.yaml
+
+  - name: grafana
+    namespace: monitoring
+    chart: /media/sf_Dima/cake/grafana/helm-charts/charts/grafana
+    #chart: grafana/grafana
+    #version: 11.0.4
+    values:
+      - ./values/grafana.yaml
