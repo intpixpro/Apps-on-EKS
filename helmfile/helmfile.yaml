@@ -42,13 +42,11 @@ releases:
     namespace: monitoring
     chart: stable/prometheus
     version: 11.0.4
-    values:
+    secrets:
       - ./values/prometheus.yaml
 
   - name: grafana
     namespace: monitoring
-    chart: /media/sf_Dima/cake/grafana/helm-charts/charts/grafana
-    #chart: grafana/grafana
-    #version: 11.0.4
+    chart: ./charts/grafana
     values:
       - ./values/grafana.yaml
