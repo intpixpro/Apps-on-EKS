@@ -6,14 +6,8 @@ releases:
   - name: postgres
     namespace: project
     chart: ./charts/postgres
-    values:
+    secrets:
       - ./values/kanban-postgres.yaml
-
-  #- name: adminer
-  #  namespace: project
-  #  chart: ./charts/app
-  #  values:
-  #    - ./values/adminer.yaml
 
   - name: kanban-app
     namespace: project
@@ -32,10 +26,10 @@ releases:
   #   chart: projectable/nginx-ingress
   #   version: 1.36.0
 
-  #- name: ingress-controller
-  #  chart: ./charts/ingress
-  #  namespace: project
-  #  values:
+  # - name: ingress-controller
+  #   chart: ./charts/ingress
+  #   namespace: project
+  #   values:
   #    - ./values/ingress.yaml
 
   - name: prometheus
@@ -45,8 +39,13 @@ releases:
     secrets:
       - ./values/prometheus.yaml
 
+  - name: prometheus-rules
+    namespace: monitoring
+    chart: ./charts/prometheus-rules
+
   - name: grafana
     namespace: monitoring
     chart: ./charts/grafana
     values:
       - ./values/grafana.yaml
+

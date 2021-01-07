@@ -23,6 +23,7 @@ postgres:
     data:
       - key: key
         value: value
+  #storageClass: region1storageclass
 
 
 

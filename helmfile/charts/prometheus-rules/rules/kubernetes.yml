@@ -1,0 +1,28 @@
+- name: kube-state-metrics.rules
+  rules:
+  # cpu
+  - record: cluster_namespace_pod_container:cpu_usage:rate
+    expr: sum(rate(container_cpu_usage_seconds_total{image!="",
+      container_name!="POD",namespace="project"}[5m])) BY ( pod, container)
+
+  - record: cluster_namespace_pod_container:spec_cpu_limit
+    expr: sum(kube_pod_container_resource_limits_cpu_cores) BY (pod)
+
+  # - alert: PodCPULimit
+  #   expr: cluster_namespace_pod_container:cpu_usage:rate > cluster_namespace_pod_container:spec_cpu_limit * 0.1
+  #   for: 1m
+  #   labels:
+  #     severity: warning
+  #   annotations:
+  #     description: Pod {{$labels.namespace}}/{{$labels.pod}} cpu limit reached {{$value | humanize}}
+  #     summary: Pod Cpu is above 10%
+
+  - alert: ContainerCPULimit
+    expr: (sum(rate(container_cpu_usage_seconds_total{namespace="project"}[3m])) BY (pod) * 100) > 10
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      description: Container {{$labels.namespace}}/{{$labels.pod}} cpu limit reached {{$value | humanize}}
+      summary: Container Cpu is above 10%
+

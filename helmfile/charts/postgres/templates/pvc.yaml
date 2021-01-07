@@ -8,3 +8,4 @@ spec:
   resources:
     requests:
       storage: {{ .Values.postgres.volume.pvc.storage }}
+  #storageClassName: {{ .Values.postgres.storageClass }}

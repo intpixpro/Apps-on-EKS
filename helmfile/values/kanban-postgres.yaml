@@ -1,16 +1,43 @@
 postgres:
-  config:
-    data:
-      - key: POSTGRES_DB
-        value: kanban
-      - key: POSTGRES_USER
-        value: kanban
-      - key: POSTGRES_PASSWORD
-        value: kanban
-  resources:
-    requests:
-      memory: 256Mi
-      cpu: 100m
-    limits:
-      memory: 512Mi
-      cpu: 1000m
+    config:
+        data:
+        -   key: ENC[AES256_GCM,data:8Op+tOdixtMFs94=,iv:Dhe1i3/EYU0UXOYE8H6nJhMlNJGUIqZkvblKL2HDFSI=,tag:8vdxvWJlmIDOMsqXyQHLDg==,type:str]
+            value: ENC[AES256_GCM,data:ICjcD9Is,iv:oGQOOOARt6kbSpDYPgZb15heW8cYi2KQK8MR9xXPE9w=,tag:KBz0fF1J4QxQsGoaVP09vQ==,type:str]
+        -   key: ENC[AES256_GCM,data:QWiKYRLiX3OqLGgjvw==,iv:3bcC5rnvpsQrwjC9hDZ7SnbnK6QKMNssjA5E1B3wyo8=,tag:xotiWWQwm/rfiQZkWKCNnA==,type:str]
+            value: ENC[AES256_GCM,data:V2gnJw1S,iv:JX0z9Qp/rKOzv9PRsOqsCDRHXUH4cIly6TKBADTfQDg=,tag:RRf+C9/fXl/TrMp2klUf/w==,type:str]
+        -   key: ENC[AES256_GCM,data:K5chJ6KEi5lrA6SxROGYnO4=,iv:FiKSfbascX8drblfAeKcN6XZGjoo8d6FIH7XdEqwQGE=,tag:WWpZweFThl8JkmKlEy6Rgw==,type:str]
+            value: ENC[AES256_GCM,data:VmNmoPQE,iv:kzzCECZ7kcYJE+3LPm56aCvWKsTEvqZREDdVsn3Wd7g=,tag:t+YmCluZ06PLourGsqA2JA==,type:str]
+    resources:
+        requests:
+            memory: ENC[AES256_GCM,data:eUaROAE=,iv:i6E9aJ/JoMuuLV6EyKxIj7wqSy9lHjaSxSQlTreegzY=,tag:pFUIOPUhaiGvA26neA4g8w==,type:str]
+            cpu: ENC[AES256_GCM,data:+GV6wg==,iv:1uyrJccBa8BIZ05wkMlKNTl5JOzBFAoDAhMGe2vIjO8=,tag:ZZVUY5KGB3lZqA1ZRu4aKA==,type:str]
+        limits:
+            memory: ENC[AES256_GCM,data:chiDcsA=,iv:Xwj7yq8BdzWI+HmkWXWtOMGxGLGoKT2LjQDFUMaeCtw=,tag:sw7G5twtCfCUD+KMgQSsvg==,type:str]
+            cpu: ENC[AES256_GCM,data:nR5J+4I=,iv:vAYGPTouKUTg3fNHT+JnezaJV5mD9SNxAG+Zb09SUhM=,tag:V8x6rUhx48mBAjbKbi8GLQ==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    lastmodified: '2021-01-07T09:04:57Z'
+    mac: ENC[AES256_GCM,data:bYjcCVnf6VITawUi4v21j0hRCqtXkWTgNW8JM1xKcsfkrR96hXGILDFjCD191glFhZwqsHzLIO920/Mbm4vEllFGMu2UFOyWa5alMFp511KWBme9ApSZHhs4PUggWpRwOdK44ABa2s3wisGmFQxWphGiHk+23fMseynQONEKFII=,iv:QPO5QbJZ5TEpe7aEeEy6r4lsjxm5p6/RSLZ8r+Lqe3M=,tag:Vx4b6r22/hh0eIKBlIskIg==,type:str]
+    pgp:
+    -   created_at: '2021-01-07T09:04:56Z'
+        enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQGMA/y4dDJuR/fVAQv9GQT6XZai11R8jLmHiHZKW3/WcTfflv9q7yKcm3GPFxaI
+            8X6gCMFYN5i96Kj76Ahbzf6bt5gK+gplktEOCm6pnddbY7XsJqM8rOJ47pmEWBpU
+            z/5M7opuCx8XXK158Q6KyfEaGGp1BDCes+KTFLIRZBeSC0vTixu+oysq5kpaXkOZ
+            xq87FlBhGy8+UYZvogB6NGZXbO7La2VaqYy8LBj+b8U6KZXGZtdJ3Fw5O/YEHmyd
+            UNl5UxQK+0ZtbQ9uDUB/aPWL2i7ZoP0kvYrSgrL1acQyEKu0+3Ue8gT5xiPSJog8
+            YaUZZTrYhV4EyHQvY2czVaKouLyOFvhriKDb60n5ZyZqQKis2kUEsRJaxBh2VYqm
+            Nfqk5IZ9Olmf3yAvlq3pf2KsRTcF3AgRPqdxPPGcye/kwv0Q+We4pL9N1YRpFNZq
+            dUq/iuQ1YPU2fL7m+pv5QgaIy/m3Opvh2LuBVm2YM/2ajy5Q8zfsWKdfEESao63Q
+            F1lv/heC+hFVifJ7em8y0l4BzZWgbDe1qZkn7NUBfHkSW0lHB/MxmdiDEMcHbgl3
+            lciPRwHGa9V8vDQlXuxVwqT28iAarwbISbMSZdhVtRdnUKS94OswdYwWoS1GwxHK
+            zQxtAIBNALJmo3i62o/Y
+            =SSBy
+            -----END PGP MESSAGE-----
+        fp: 97B546BC415EB2FFEF2244EDFBFEE48D68F049CD
+    unencrypted_suffix: _unencrypted
+    version: 3.3.0
