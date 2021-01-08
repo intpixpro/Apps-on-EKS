@@ -5,7 +5,7 @@ help:
 	@# prometheus_portforward 	- prometheus port frowarding to any ip address on port 9090.
 	@# alertmanager_portforward 	- alertmanager port frowarding to any ip address on port 9093.
 	@# grafana_portforward		- grafana port frowarding to any ip address on port 3000.
-	@# run_app_load_on_app 		- run "dd if=/dev/zero of=/dev/null" to perform cpu loading.
+	@# run_memory_load_on_app 	- run "dd if=/dev/zero of=/dev/null bs=1G" to perform memory loading by comsumpting 1G of memory.
 	@./scripts/makefilehelp.sh
 
 all_portforward: grafana_portforward prometheus_portforward alertmanager_portforward
@@ -25,5 +25,5 @@ prometheus_portforward:
 alertmanager_portforward:
 	/bin/bash ./scripts/run_command.sh alertmanager_portforward
 
-run_app_load_on_app:
-	/bin/bash ./scripts/run_command.sh run_app_load_on_app
+run_memory_load_on_app:
+	/bin/bash ./scripts/run_command.sh run_memory_load_on_app

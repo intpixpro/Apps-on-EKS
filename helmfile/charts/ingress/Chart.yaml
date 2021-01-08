@@ -8,7 +8,4 @@ keywords:
   - ingress
   - nginx
   - api-gateway
-home: https://github.com/wkrzywiec/k8s-helm-helmfile/tree/master/helm
-maintainers:
-  - name: Wojtek Krzywiec
-    url: https://github.com/wkrzywiec
+
