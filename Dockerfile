@@ -7,8 +7,6 @@ ARG HELM_VERSION=3.4.2
 ARG HELM_DIFF_VERSION=3.1.3
 ARG HELM_SECRETS_VERSION=2.0.2
 ARG HELMFILE_VERSION=0.135.0
-ARG HELM_S3_VERSION=0.10.0
-ARG HELM_GIT_VERSION=0.8.1
 
 WORKDIR /project
 
@@ -46,5 +44,3 @@ RUN helmfile version
 
 COPY --from=terraform /bin/terraform /bin/terraform
 RUN terraform version
-
-#ENTRYPOINT ["/bin/bash"]

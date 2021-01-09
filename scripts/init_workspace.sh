@@ -13,6 +13,12 @@ get_eks_kubeconfig () {
     aws eks --region $region update-kubeconfig --name $cluster_name
 }
 
+#import gpg key to be able to decrypt helm secrets
+import_gpg_key () {
+    gpg --import gpg-key/private.key
+}
+
+#create "project" and "monitoring" namespaces
 create_namespace () {
     projectNs=`kubectl get ns project | sed -n 2p | awk '{print $1}'`
 
@@ -31,10 +37,7 @@ create_namespace () {
     fi
 }
 
-#import gpg key to be able to decrypt helm secrets
-import_gpg_key () {
-    gpg --import gpg-key/private.key
-}
+
 
 get_eks_kubeconfig
 
