@@ -1,6 +1,6 @@
 # Step by step instructions of infrastructure creation
 
-In this instruction you will find infomation how to create Kubernetes cluster with terraform on AWS - Elastic Kubernetes Service (EKS) and how to deploy simple application using helmfile to EKS.
+In this instruction you will learn how to create Kubernetes cluster with terraform on AWS - Elastic Kubernetes Service (EKS) and how to deploy simple application using helmfile to EKS.
 
 Following tools are required to create the infrastructure:
 
@@ -12,11 +12,11 @@ Following tools are required to create the infrastructure:
 - aws-iam-authenticator
 - makefile
 
->As any engineer use any operating system I decided to unify the process of tools installation. So I prepared a Dockerfile where are mentioned all required tools. You just need to build a docker comtainer and you will be able to manage the infrastructure in this project.
+>As each engineer uses different operating system I decided to unify the process of tools installation. You don't need to install anything on your computer. I prepared a Dockerfile where all required tools are listed. You just need to build a docker container and you will be able to manage the infrastructure in this project.
 
 ## 1. Building and running the docker container
 
-First what we shall do is to build container with the following command:
+The first what we need to build container with the following command:
 
 ```shell
 $ docker build . -t controller:0.1
@@ -34,7 +34,7 @@ $ docker run  -d --privileged \
             -e WEBHOOK_URL='http://webhook_alerts.com/test' \
             -it controller:0.1 bash
 ```
-- ```-v ~/.aws/:/root/.aws \``` - here we attach a AWS config and credential to container.
+- ```-v ~/.aws/:/root/.aws \``` - here we attach a AWS config and credential files to container.
 
 - ```-v ${PWD}:/project \``` - the flag means that it mounts current directory to the container's directory with the name `project`, so please consider to run the container from the root of the project.
 
@@ -43,11 +43,11 @@ $ docker run  -d --privileged \
     - ```-p 9093:9093 \``` - Alertmanager
     - ```-p 3000:3000 \``` - Prometheus
 
-- ```-e EMAIL_NOTIFICATION='email_to_send_alerts@gmail.com' \``` - this environment variable is required for ***alert notification to email***, so please set your own email.
+- ```-e EMAIL_NOTIFICATION='email_to_send_alerts@gmail.com' \``` - this environment variable is required for ***alert notification to email***, please set your own email.
 
-- ```-e WEBHOOK_URL='http://webhook_alerts.com/test' \``` - - this environment variable is required to send ***HTTP POST alert notification***.
+- ```-e WEBHOOK_URL='http://webhook_alerts.com/test' \``` - - this environment variable is required to send ***HTTP POST alert notification*** to configurable endpoint, please set your webhoork url.
 
-Below the command to get a bash shell in the container:
+The command below allows to get a bash shell in the container:
 
 ```shell
 $ docker exec -it container_id bash
@@ -67,18 +67,18 @@ $ terraform plan
 ```shell
 $ terraform apply
 ```
-It takes about 15-20 minutes for completed installation.
+It takes about 15-20 minutes to complete installation.
 
 ### 3. Commands descriptions
 
-From the root directory `/project` call command
+From the root directory `/project` you should call the command
 ```shell
 $ make
 ```
-And you will find command decsriptions as follows:
+And you will find the command decsriptions as follows:
 
 ```
- init_workspace                  - initiate workspace by importing kubeconfig, gpg key and namespace creation.
+ init_workspace                 - initiate workspace by importing kubeconfig, gpg key and namespace creation.
  deploy_apps                    - deploying process of product application grafana, prometheus and postgresql database.
  all_portforward                - run port forwarding on grafana, alertmanager and prometheus simultaneously.
  prometheus_portforward         - prometheus port frowarding to any ip address on port 9090.
@@ -89,17 +89,17 @@ And you will find command decsriptions as follows:
 
 ## 4. Workspace prepration
 
-Using below command we initialise our workspace for the following reasons:
+By using the command below we initialise our workspace for the following reasons:
 
-- get kubeconfig to manage the Kubernetes cluster
-- import gpg key to decrypt secrets
-- create two namespaces - project and monitoring
+- to get kubeconfig to manage the Kubernetes cluster
+- to import gpg key to decrypt secrets
+- to create two namespaces - project and monitoring
 
 ```shell
 $ make init_workspace
 ```
 
->During script execution you will be asked to provide passphrase to perform importing of gpg key.
+>During script execution you will be asked to provide passphrase to import the gpg key.
 
 ```
 secret
@@ -112,9 +112,9 @@ The project kanban-board includes 3 services:
 - backend service (kanban-app, written in Java with Spring Boot)
 - and frontend (kanban-ui, written with Angular framework).
 
-!!!!!!To enter one of these two UI apps user will need to type one of following URLs in the web browser:
+!!!!!!To enter one of the one UI apps the user will need to type one of following URLs in the web browser:
 kanban.k8s.com
-adminer.k8s.com!!!!!
+!!!!!
 
 Before deploying process we need to reload gpg agent to be able to decrypt the secrets.
 
@@ -136,7 +136,7 @@ secret
 
 ## 6. Portforwarding
 
-We are going to use Grafana, Prometheus and Alertmanager to monitor applications. There are separate comands to make portforwaring for each of them but you can do it with only one of it.
+We will use Grafana, Prometheus and Alertmanager to monitor applications. There are separate comands to make portforwaring for each of them but you can do it using only one.
 
 ```shell
 $ make all_portforward
@@ -154,13 +154,13 @@ Below are ports related to monitoring tool:
 
 ## 7. Loading tests
 
-Now we can initiate the load to the applications.
+Now we can imitate the load to the applications.
 
 ```shell
 $ make run_memory_load_on_app
 ```
 
-In few minutes you should get alet notification to you email.
+In a few minutes you should get alet notification to you email.
 
 ## 8. Destroying EKS cluster
 
@@ -172,7 +172,7 @@ $ terraform destroy
 
 ## Conclusion
 
-In this article I've tried to cover all requirements from the tasks.
+In this manual I tried to cover all the requirements of the tasks.
 - The process of EKS installation.
 
 - The deployment processes of applications and monitoring tools, uncluding the following:
