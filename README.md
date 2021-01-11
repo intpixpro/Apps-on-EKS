@@ -19,7 +19,7 @@ Following tools are required to create the infrastructure:
 In case if don't want to waste a time with building container , you can pull image from dockerhub.
 
 ```shell
-docker push digitalcare/controller:0.1
+docker pull digitalcare/controller:0.1
 ```
 
 Or build the container with the following command:
