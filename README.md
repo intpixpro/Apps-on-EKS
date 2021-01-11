@@ -86,6 +86,7 @@ And you will find the command decsriptions as follows:
 ```
  init_workspace                 - initiate workspace by importing kubeconfig, gpg key and namespace creation.
  deploy_apps                    - deploying process of product application grafana, prometheus and postgresql database.
+ get_ingress_hostname           - get ingress hostname of AWS Load Balancer
  all_portforward                - run port forwarding on grafana, alertmanager and prometheus simultaneously.
  prometheus_portforward         - prometheus port frowarding to any ip address on port 9090.
  alertmanager_portforward       - alertmanager port frowarding to any ip address on port 9093.
