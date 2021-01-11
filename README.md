@@ -22,7 +22,7 @@ In case if don't want to waste a time with building container , you can pull ima
 docker pull digitalcare/controller:0.1
 ```
 
-Or build the container with the following command:
+Or you can build the container with the following command:
 
 ```shell
 $ docker build . -t controller:0.1
