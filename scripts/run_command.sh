@@ -2,7 +2,6 @@
 
 grafana_portforward() {
     export POD_NAME=$(kubectl get pods --namespace monitoring -l "app.kubernetes.io/name=grafana,app.kubernetes.io/instance=grafana" -o jsonpath="{.items[0].metadata.name}") && wait
-    echo "Pod name: $POD_NAME"
 
     kubectl --namespace monitoring port-forward --address 0.0.0.0 $POD_NAME 3000 &
 
@@ -24,6 +23,9 @@ run_memory_load_on_app() {
     kubectl --namespace project exec -it $APP_POD -- /bin/sh -c "dd if=/dev/zero of=/dev/null bs=800M"
 }
 
+get_ingress_hostname() {
+    kubectl get ingress ingress-service -n project -o json | jq .status.loadBalancer.ingress[0].hostname
+}
 gpg_agent_reload() {
     GPG_TTY=$(tty)
     export GPG_TTY

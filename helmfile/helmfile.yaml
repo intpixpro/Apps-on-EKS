@@ -2,6 +2,9 @@ repositories:
   - name: stable
     url: https://charts.helm.sh/stable
 
+  - name: ingress-nginx
+    url:  https://kubernetes.github.io/ingress-nginx
+
 releases:
   - name: postgres
     namespace: project
@@ -21,16 +24,15 @@ releases:
     values:
       - ./values/kanban-ui.yaml
 
-  # - name: ingress-backend
-  #   namespace: project
-  #   chart: projectable/nginx-ingress
-  #   version: 1.36.0
+  - name: ingress-backend
+    namespace: project
+    chart: ./charts/ingress
+    values:
+      - ./values/ingress.yaml
 
-  # - name: ingress-controller
-  #   chart: ./charts/ingress
-  #   namespace: project
-  #   values:
-  #    - ./values/ingress.yaml
+  - name: ingress-controller
+    chart: ingress-nginx/ingress-nginx
+    namespace: ingress-nginx
 
   - name: prometheus
     namespace: monitoring

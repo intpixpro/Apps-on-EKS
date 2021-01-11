@@ -35,6 +35,14 @@ create_namespace () {
     else
         kubectl create ns monitoring
     fi
+
+    ingressnginxNs=`kubectl get ns ingress-nginx | sed -n 2p | awk '{print $1}'`
+
+    if [ "$ingressnginxNs" == "ingress-nginx" ]; then
+        echo "Namespace ingress-nginx already exists"
+    else
+        kubectl create ns ingress-nginx
+    fi
 }
 
 

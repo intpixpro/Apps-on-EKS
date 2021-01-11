@@ -1,11 +1,11 @@
 ingress:
   name: ingress-service
   replicaCount: 1
-  annotations: 
+  annotations:
     class: nginx
   hosts:
     - host: chart-example.local
-      paths: 
+      paths:
         - path: /
           backend:
             serviceName: serviceName

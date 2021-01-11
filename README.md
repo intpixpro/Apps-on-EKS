@@ -16,7 +16,13 @@ Following tools are required to create the infrastructure:
 
 ## 1. Building and running the docker container
 
-The first what we need to build container with the following command:
+In case if don't want to waste a time with building container , you can pull image from dockerhub.
+
+```shell
+docker push digitalcare/controller:0.1
+```
+
+Or build the container with the following command:
 
 ```shell
 $ docker build . -t controller:0.1
@@ -84,7 +90,7 @@ And you will find the command decsriptions as follows:
  prometheus_portforward         - prometheus port frowarding to any ip address on port 9090.
  alertmanager_portforward       - alertmanager port frowarding to any ip address on port 9093.
  grafana_portforward            - grafana port frowarding to any ip address on port 3000.
- run_memory_load_on_app         - run "dd if=/dev/zero of=/dev/null bs=1G" to perform memory loading by comsumpting 1G of memory.
+ run_memory_load_on_app         - run on the pod kanban-app-xxxx-xx the command "dd if=/dev/zero of=/dev/null bs=1G" to perform memory loading by comsumpting 1G of memory.
 ```
 
 ## 4. Workspace prepration
@@ -112,10 +118,6 @@ The project kanban-board includes 3 services:
 - backend service (kanban-app, written in Java with Spring Boot)
 - and frontend (kanban-ui, written with Angular framework).
 
-!!!!!!To enter one of the one UI apps the user will need to type one of following URLs in the web browser:
-kanban.k8s.com
-!!!!!
-
 Before deploying process we need to reload gpg agent to be able to decrypt the secrets.
 
 ```shell
@@ -133,8 +135,24 @@ During deploying process you will be asked again to provide passphrase.
 ```
 secret
 ```
+To enter to the UI app you will need to do the following:
 
-## 6. Portforwarding
+- Get external url of ingress (AWS ELB)
+
+```shell
+$  make get_ingress_hostname
+```
+- Resolve this external url with any tool (nslookup or dig) on your work computer.
+
+- Then you need to put resolved ips to your hosts file as follows:
+    ```
+    99.81.152.50 kanban.k8s.com
+    34.248.86.187 kanban.k8s.com
+    ```
+- Now `kanban.k8s.com` should be available on your browser.
+
+
+## 6. Monitoring
 
 We will use Grafana, Prometheus and Alertmanager to monitor applications. There are separate comands to make portforwaring for each of them but you can do it using only one.
 
@@ -152,6 +170,9 @@ Below are ports related to monitoring tool:
 127.0.0.1:9093 - Alertmanager
 ```
 
+In Grafana UI you can find dashboard `Kubernetes: POD Overview` with applications' metrics related to CPU and Memory in namespace `project`.
+In Prometheus and Alertmanager you can check alerts statuses.
+
 ## 7. Loading tests
 
 Now we can imitate the load to the applications.
@@ -160,7 +181,7 @@ Now we can imitate the load to the applications.
 $ make run_memory_load_on_app
 ```
 
-In a few minutes you should get alet notification to you email.
+In a few minutes you should get alet notification to you email about load memory.
 
 ## 8. Destroying EKS cluster
 
